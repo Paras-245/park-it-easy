@@ -1,10 +1,7 @@
 import customerModel from "../models/customerModel";
 
 import {
-    getCurrentDateTime,
-    verifyPayment,
-    createRazorpayOrder,
-    fetchDirectionForCustomer,
+  
     findNearestVacantSpot,
     findPathToAllocatedPillar
   } from "../../util/util";
@@ -40,11 +37,11 @@ export const postNumberPlateEntry = async (req, res) => {
     await newCustomer.save();
 
 
-    const paymentOrder = await createRazorpayOrder(newCustomer,amount || 100);
+    // const paymentOrder = await createRazorpayOrder(newCustomer,amount || 100);
 
     return res.status(200).json({
       status_code: 200,
-      data: paymentOrder, // Assuming createRazorpayOrder returns order details
+      // data: paymentOrder, // Assuming createRazorpayOrder returns order details
       message: "Entry and payment order successfully created"
     });
 
@@ -65,37 +62,36 @@ export const paymentVerificationAndDirectionAllotment = async (req, res) => {
   try {
     const { razorpay_signature, razorpay_order_id, razorpay_payment_id, customerID } = req.body;
 
-    if (!verifyPayment(razorpay_order_id, razorpay_payment_id, razorpay_signature)) {
-      return res.status(400).json({
-        status_code: 400,
-        message: "Payment verification failed"
-      });
+    // // if (!verifyPayment(razorpay_order_id, razorpay_payment_id, razorpay_signature)) {
+    // //   return res.status(400).json({
+    // //     status_code: 400,
+    // //     message: "Payment verification failed"
+    // //   });
+    // // }
+
+    // // Record the sales transaction
+    // const newTransaction = new salesTransactionModel({
+    //   razorpay_order_id,
+    //   razorpay_payment_id,
+    //   razorpay_signature,
+    //   customerID,
+    //   status: 'verified'
+    // });
+    // await newTransaction.save();
+
+    // // Update customer as payment verified
+    // const customerUpdate = await customerModel.findByIdAndUpdate(customerID, {
+    //   $set: { isPaymentVerified: true },
+    //   $push: { transactions: newTransaction._id }  // Assuming you store transaction references in customer model
+    // }, { new: true }).populate('organisation');
+
+    // if (!customerUpdate) {
+    //   return res.status(404).json({
+    //     status_code: 404,
+    //     message: "Customer not found"
+    //   });
     }
 
-    // Record the sales transaction
-    const newTransaction = new salesTransactionModel({
-      razorpay_order_id,
-      razorpay_payment_id,
-      razorpay_signature,
-      customerID,
-      status: 'verified'
-    });
-    await newTransaction.save();
-
-    // Update customer as payment verified
-    const customerUpdate = await customerModel.findByIdAndUpdate(customerID, {
-      $set: { isPaymentVerified: true },
-      $push: { transactions: newTransaction._id }  // Assuming you store transaction references in customer model
-    }, { new: true }).populate('organisation');
-
-    if (!customerUpdate) {
-      return res.status(404).json({
-        status_code: 404,
-        message: "Customer not found"
-      });
-    }
-
-    const organisation = customerUpdate.organisation;
 
     // Fetch parking layout details for the organization
     let pillarDetails = await parkingModel.findOne({ organisation: organisation });

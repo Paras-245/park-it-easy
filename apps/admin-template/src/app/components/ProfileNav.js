@@ -22,7 +22,7 @@ export default function ProfileNav() {
                 </div>
             </nav>
 
-            <h1 className="text-2xl font-bold mb-2">Let's get started</h1>
+            <h1 className="text-2xl font-bold mb-2">Lets get started</h1>
             <p className="text-lg mb-4">Take a few minutes to setup your mall parking</p>
             <div className="w-full flex justify-between items-center">
                 <Link href='/profile' className="w-[30%]">

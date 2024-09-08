@@ -119,7 +119,7 @@ export default function LandingPage() {
           <button className="bg-black flex justify-center items-center gap-2 text-white rounded-lg p-2 px-4  mr-5" ><PiStarFourThin /> Get Started</button>
           {/* <button className=" text-black border border-gray-600 font-semibold rounded-lg p-2 px-4">Free Demo Tutorial </button> */}
         </div>
-        <img src="/image.png" alt="image" className="w-[400px] h-[600px] ml-16" />
+        <img src="/iPhone-13-Pro-Front.png" alt="image" className="w-[400px] h-[600px] ml-16" />
 
         {/* team */}
         <h1 id="about" className="font-semibold text-3xl my-4" >Our Team</h1>
@@ -139,7 +139,7 @@ export default function LandingPage() {
 
       <section id="solution" className="w-full flex flex-col lg:flex-row justify-between relative items-center">
         <div className="w-[85%] bg-white md:w-[40%] ml-[4rem] md:ml-0 h-[600px] lg:h-[900px] mt-7 rounded-tl-xl rounded-tr-xl md:rounded-tr-none md:rounded-bl-xl flex justify-center items-center relative overflow-hidden">
-          <img src="/image.png" alt="mobile" loading="lazy" className="absolute inset-0 w-[100%] h-[100%]" />
+          <img src="/iPhone-13-Pro-Front (1).png" alt="mobile" loading="lazy" className="absolute inset-0 w-[100%] h-[100%]" />
         </div>
 
         <div className="w-full md:w-[60%] flex flex-col justify-center items-center gap-[2rem] p-6">

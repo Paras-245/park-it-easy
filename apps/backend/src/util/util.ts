@@ -1,6 +1,5 @@
 import crypto from "crypto";
 
-import {razorPayInstance} from "../config/razorPay";
 
 
 export function getCurrentDateTime() {
@@ -19,65 +18,61 @@ export function getCurrentDateTime() {
   };
 
 
-  export function fetchDirectionForCustomer (){
-
-  }
-
 
   
-export function verifyPayment(
-    razorpay_order_id,
-    razorpay_payment_id,
-    razorpay_signature
-  ) {
-    try {
-      // console.log("razorpay_order_id => ", razorpay_order_id)
-      // console.log("razorpay_payment_id => ", razorpay_payment_id)
-      // console.log("razorpay_signature => ", razorpay_signature)
-      // console.log("process.env.RAZORPAY_API_SECRET => ", process.env.RAZORPAY_API_SECRET)
+// export function verifyPayment(
+//     razorpay_order_id,
+//     razorpay_payment_id,
+//     razorpay_signature
+//   ) {
+//     try {
+//       // console.log("razorpay_order_id => ", razorpay_order_id)
+//       // console.log("razorpay_payment_id => ", razorpay_payment_id)
+//       // console.log("razorpay_signature => ", razorpay_signature)
+//       // console.log("process.env.RAZORPAY_API_SECRET => ", process.env.RAZORPAY_API_SECRET)
   
-      const body = razorpay_order_id + "|" + razorpay_payment_id;
-      const expectedSignature = crypto
-        .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
-        .update(body.toString())
-        .digest("hex");
+//       const body = razorpay_order_id + "|" + razorpay_payment_id;
+//       const expectedSignature = crypto
+//         .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
+//         .update(body.toString())
+//         .digest("hex");
   
-      console.log("expectedSignature => ", expectedSignature);
+//       console.log("expectedSignature => ", expectedSignature);
   
-      const result = expectedSignature === razorpay_signature;
+//       const result = expectedSignature === razorpay_signature;
   
-      console.log("result of verifyPayment => ", result);
-      return result;
-    } catch (error) {
-      console.error("Error during payment verification:", error);
-      return false;
-    }
-  };
+//       console.log("result of verifyPayment => ", result);
+//       return result;
+//     } catch (error) {
+//       console.error("Error during payment verification:", error);
+//       return false;
+//     }
+//   };
 
 
   
-  export async function createRazorpayOrder(customer, amount) {
-    const options = {
-      amount: amount*100,
-      currency: "INR",
-      receipt: "receipt#1",
-      notes: {
-        customer_id: customer._id.toString(),
-        vehicleNumber: customer.vehicleNumber
-      }
-    };
+  // export async function createRazorpayOrder(customer, amount) {
+  //   const options = {
+  //     amount: amount*100,
+  //     currency: "INR",
+  //     receipt: "receipt#1",
+  //     notes: {
+  //       customer_id: customer._id.toString(),
+  //       vehicleNumber: customer.vehicleNumber
+  //     }
+  //   };
   
-    try {
-      const order = await razorPayInstance.orders.create(options);
-      return {
-        orderId: order.id,
-        orderDetails: order
-      };
-    } catch (error) {
-      console.error('Order creation failed:', error);
-      throw new Error('Failed to create Razorpay order');
-    }
-  }
+  //   try {
+  //     const order = await razorPayInstance.orders.create(options);
+  //     return {
+  //       orderId: order.id,
+  //       orderDetails: order
+  //     };
+  //   } catch (error) {
+  //     console.error('Order creation failed:', error);
+  //     throw new Error('Failed to create Razorpay order');
+  //   }
+  // }
 
   // Utility to find the nearest vacant spot in a 2D array
   export async function findNearestVacantSpot  (pillars2D, entryPosition)  {
