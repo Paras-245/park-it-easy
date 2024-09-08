@@ -4,9 +4,9 @@ import parkingLayoutModel from "../models/parkingModel";
 const Mall = require('../models/mallModel'); 
 
 export const submitParkingFee = async (req, res) => {
-  const { carPrice, vehiclePrice } = req.body;
+  const { carPrice, vehiclePrice , preHead } = req.body;
 
-  const refreshToken = req?.headers?.authorization?.split(" ")[1];
+  // const refreshToken = req?.headers?.authorization?.split(" ")[1];
 
 
   if (!carPrice || !vehiclePrice) {
@@ -19,7 +19,7 @@ export const submitParkingFee = async (req, res) => {
 
   try {
       const updatedOrg = await organisationModel.findOneAndUpdate(
-          { refreshToken },
+          { organizationUniqueDomainID: preHead },
           { $set: { carPrice, vehiclePrice }},
           { new: true }
       );
@@ -38,8 +38,8 @@ export const submitParkingFee = async (req, res) => {
 
 
 export const submitParkingLayout = async (req, res) => {
-  const { numberOfPillars, pillars, minCarsPerPillar, entryGateNearestPillar, exitGateNearestPillar } = req.body;
-  const refreshToken = req?.headers?.authorization?.split(" ")[1];
+  const { numberOfPillars, pillars, minCarsPerPillar, entryGateNearestPillar, exitGateNearestPillar, preHead } = req.body;
+  // const refreshToken = req?.headers?.authorization?.split(" ")[1];
 
 
   if (!numberOfPillars || !pillars || !minCarsPerPillar || !entryGateNearestPillar || !exitGateNearestPillar) {
@@ -61,7 +61,7 @@ export const submitParkingLayout = async (req, res) => {
     });
 
     const updatedOrg = await organisationModel.findOneAndUpdate(
-      { refreshToken:refreshToken },
+      { organizationUniqueDomainID:preHead },
       {
           $set: {
             parkingLayout: newParkingModel
@@ -88,9 +88,9 @@ export const submitParkingLayout = async (req, res) => {
 
 
 export const submitMallDetails = async (req, res) => {
-  const { complexName, email, mallLocation, contactSupport } = req.body;
+  const { complexName, email, mallLocation, contactSupport, preHead } = req.body;
 
-  const refreshToken = req?.headers?.authorization?.split(" ")[1];
+  // const refreshToken = req?.headers?.authorization?.split(" ")[1];
 
 
 
@@ -104,7 +104,7 @@ export const submitMallDetails = async (req, res) => {
 
   try {
       const updatedOrg = await organisationModel.findOneAndUpdate(
-          { refreshToken },
+          { organizationUniqueDomainID: preHead },
           { $set: { name: complexName, email, city: mallLocation, mobileNumber: contactSupport }},
           { new: true }
       );
