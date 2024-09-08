@@ -1,7 +1,6 @@
 import organisationModel from "../models/organisationModel";
 import parkingLayoutModel from "../models/parkingModel";
 
-
 const Mall = require('../models/mallModel'); 
 
 export const submitParkingFee = async (req, res) => {

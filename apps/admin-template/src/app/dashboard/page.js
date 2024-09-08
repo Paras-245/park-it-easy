@@ -7,5 +7,6 @@ export default function Dashboard() {
             <ProfileNav/>
             <TrafficTable/>
         </section>
+        
     )
 }
